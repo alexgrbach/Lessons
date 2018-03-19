@@ -1,0 +1,48 @@
+##Place in git-core as saferebase 
+
+
+while [[ $# -gt 0 ]]
+do
+branch="$1"
+
+
+##Setting up colors
+Red="\033[0;31m";
+
+#Checking some conditions
+
+if [[ $(git rev-parse --is-inside-work-tree) != "true" ]]; then
+	echo -e $Red"not in a repo"$NoColor
+	exit
+fi
+
+CURRENTBRANCH=$(git rev-parse --abbrev-ref HEAD);
+
+if [[ $CURRENTBRANCH == "develop" ]]; then
+	echo -e $Red"Do not run this on develop."$NoColor
+	exit	
+fi
+
+if [[ $CURRENTBRANCH == "master" ]]; then
+	echo -e $Red"Do not run this on master."$NoColor
+	exit
+fi
+
+# if branch exists REMOTECHECK will eq 1
+REMOTECHECK=$(git ls-remote --heads $(git config --get remote.origin.url) $CURRENTBRANCH | wc -l)
+
+if [[ $REMOTECHECK -eq 1 ]]; then
+	echo -e $Red"Branch has already been pushed to remote."
+	exit
+fi
+
+NUMOFCOMMITS=$(git cherry -v develop | wc -l);
+
+if [[ NUMOFCOMMITS -eq 0 ]]; then
+	echo -e $Red"Nothing to rebase"
+	exit
+fi
+
+#If all passed rebase
+
+git rebase $branch
