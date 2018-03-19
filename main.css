@@ -13,3 +13,7 @@ samp:before {
     content: "$";
     margin-right: 6px;
 }
+
+body{
+	margin-bottom: 10vh;
+}
