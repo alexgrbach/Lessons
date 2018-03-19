@@ -1,10 +1,8 @@
 code {
-	background-color:  #ffcccc;
-}
-
-pre {
-background-color: #ffcccc;	
-width: 50vw;
+	background-color: #dddddd;
+	display: inline-block;
+	padding: 3px;
+	font-size: 1em;
 }
 
 samp{
