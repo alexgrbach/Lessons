@@ -1,5 +1,4 @@
-##Place in git-core as saferebase 
-
+##Place in git-core as saferebase
 
 while [[ $# -gt 0 ]]
 do

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shell/gitlesson</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+<body>
+
+<h1>Moving Around the shell</h1>
+
+<p>First thing is first. Lets figure out where you are at!</p>
+
+<samp>pwd</samp>
+<code>C/Users/Alex/</code>
+
+<p>This just printed your current directory. If you just opened your terminal window this should be your home directory</p>
+
+<p>Lets figure out what is in this directory</p>
+<samp>ls</samp>
+<pre><code>Applications
+Creative Cloud Files Desktop
+Documents
+Downloads
+Google Drive
+Library
+Movies
+Music
+Pictures
+Public
+git
+</code></pre>
+
+<p>ls will print the contents of your directory. There are some files that aren't shown. To see these files we can add arguments to our commands</p>
+<p>For example we can list all the contents of this directory with</p>
+<samp>ls -a</samp>
+<pre><code>.
+..
+.adobe
+.bash_alias
+.bash_aliases
+.bash_history
+.bash_it
+.bash_profile
+.bash_profile.bak
+.bash_sessions
+.CFUserTextEncoding
+.config
+.DS_Store
+.local
+.npm
+.oracle_jre_usage
+.python_history
+.ssh
+.Trash
+.viminfo
+.virtualenvs
+Applications
+Creative Cloud Files Downloads
+Desktop
+Documents
+git
+Google Drive
+Library
+Movies
+Music
+Pictures
+Public</code></pre>
+<p>The first two directories here are special paths that are in every directory</p>
+<p><code>.</code> is the current directory, so to access a hidden file in the directory you would type in <code>.file</code></p>
+<p><code>..</code> is the previous directory</p>
+<p>To move to the previous directory we would type in <samp>cd ..</samp></p>
+<p>There are some shortcuts to some special directories</p>
+<p><samp>/</samp> is the root directory of your computer typically the <code>C:/</code> drive on windows machines</p>
+<p><samp>~</samp> is your home directory. In windows its typically <code>C:/Users/UserName/</code></p>
+<p>Lets move to your git directory by typing in <samp>cd /git/</samp></p>
+<p>With <samp>ls</samp> from before we can see all of our git repositories.</p>
+<p>There are many more commands that you can use to assist you in the shell. Those can come in a later lesson. This lesson is just the basics to get you moving around and working in git</p>
+<h1>Git basics and workflow</h1>
+<p>Git is the source control program we use. It is a very powerful tool set that can be used for any project. It allows for easy file revisions and collaboration between many people</p>
+<p>To start navigate to the project you have done work in and identify your issue number</p>
+<p>We need to make a branch before we start coding so our work can be submitted and reviewed speretly from our working branch which is usually <code>develop</code></p>
+
+<h3>Branch Naming</h3>
+<p>For issue number that are 6 places like issue #123456 we use the scheme <code>SP/123000/400/123456</code></p>
+<p>For issue number with 5 places like #12345 we use <code>SP/12000/12345</code></p>
+<p>For features that don't have an issue number <code>feature/{FirstInital}{LastName}/{distinctFeatureName}</code></p>
+<h3>Creating and moving to the branch</h3>
+<p><samp>git branch {branch name}</samp> Will create your branch</p>
+<p>To move to that branch so you can start coding <samp>git checkout {branch name}</samp></p>
+<p>Now that we have our branch go write some code and come back after you have made some progress</p>
+<h3>Committing your code</h3>
+<p>A commit is how we creates a checkpoint for our code. It saves all the work you have done.</p>
+<p>Commits should be done early and often. Think every time you come to a good stopping point.</p>
+<p>Commits can also be done to just save your work at the end of the day or whenever you need to work on something else</p>
+<p>The first part of the commit is to see the status of your work. For this example we are going to be using the directory of the project this file is in.</p>
+<samp>git status</samp>
+<pre><code>On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+	MovingAroundTheShell.html
+	main.css
+	scripts/
+
+no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
+<p>Here we can see many different things that were output</p>
+<p>To start we see</p>
+<pre><code>On branch master
+Your branch is up-to-date with 'origin/master'.</code></pre>
+<p>This is the the current branch you are on. Yours should correspond to the issue you are working on.</p>
+<pre><code>Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+	MovingAroundTheShell.html
+	main.css
+	scripts/</code></pre>
+<p>These are new files that were added and are untracked by git</p>
+<p>We need to add them with <samp>git add {filename}</samp> or if you want to add them all at once you can use</p>
+<samp>git add --all</samp>
+<p>Now to see what happened we can use</p>
+<samp>git status</samp>
+<pre><code>On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+	new file:   MovingAroundTheShell.html
+	new file:   main.css
+	renamed:    git-safeRebase -> scripts/git-safeRebase
+</code></pre>
+<p>We see that the files are staged and ready to be committed. If you want to remove a single file you can use <samp>git reset HEAD &lt;file&gt;</samp></p>
+<p>To reset all of the file you can use <samp>git reset HEAD --mixed</samp></p>
+<p><code>HEAD</code> is the current state of your branch</p>
+<p>Be very careful with the <code>reset</code> command. You can lose work if you use it wrong</p>
+<samp>git commit</samp>
+<p>This launched the text editor <code>VIM</code> by default</p>
+<p>To write your commit message you must first press the <code>a</code> (amend) or the <code>i</code> (insert) key</p>
+<p>Now you can type your commit message out as normal. When you are done hit <code>esc</code> and then type <code>:wq</code> and hit <code>enter</code> to save your commit message</p>
+</body>
+</html>
+
+
+
+<!-- $ pwd - Print Working Directory
+
+Now lets see what is in this directory.
+
+$ ls - List files
+
+pwd - 	shows the current filepath
+ls - lists directories in pwd
+	`$ ls --help`
+		talk about help/man
+	`$ ls -la`
+		explain special files
+		hidden files
+			.filename
+			.directory
+cd - change directory
+	`$ cd directory`
+		changes to that directory
+	`$ cd . `
+		your current directory
+	`$ cd ..`
+		the previous directory
+	`$ cd or `$ cd ~`
+		shortcut to your home directory
+	`$ cd /`
+		root directory
+mkdir - make directory
+	`$ mkdir ~/test_dir`
+		makes a directory called git in your home directory
+touch - create file
+	`$ cd test_dir`
+	`$ touch testFile`
+echo - echos back whatever you type after it
+	`$ echo lol`
+	Can also be used to write lines to a file
+		```$ echo lol >> testFile
+		$ echo this is a sentence >> testFile```
+cat - prints contents of files to console
+	```$ cat testFile
+	$ echo this will write over the whole file > testFile```
+		be careful when using `>` and `>>`
+		`>` will write over the whole file
+		`>>` will append a newline to the file 
+less - prints contents of files to console but is more interactive
+	`$ less testFile`
+mv - move
+	```
+	$ touch ~/testFile2
+	$ mv ~/testFile2 testFile2
+	```
+cp - copy
+	`$ cp testFile2 testFile3`
+rm - remove
+	```
+	$ rm testFile
+	$ rm testFile*
+	```
+		you can use wild cards this will delete testFile2 and testFile3
+	```
+	$ cd ..
+	$ rm test_dir
+	```
+		will error out saying its a directory
+	```$ rm -rf test_dir
+	$ rm --help```
+		-r removes directories and their files recursively
+		-f force
+			Be very careful when using this. You cannot get your files back if you delete them by mistake -->
